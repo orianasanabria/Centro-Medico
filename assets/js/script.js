@@ -1,4 +1,6 @@
-var radiologia = [
+/* Empieza Desafío 1 */
+
+let radiologia = [
     {
         Hora: '11:00',
         Especialista: 'Ignacio Schuls',
@@ -36,7 +38,7 @@ var radiologia = [
     }
 ];
 
-var traumatologia = [
+let traumatologia = [
     {
         Hora: '8:00',
         Especialista: 'Maria Paz Altuzarra',
@@ -88,7 +90,7 @@ var traumatologia = [
     }
 ];
 
-var dental = [
+let dental = [
     {
         Hora: '8:30',
         Especialista: 'Andrea Zuñiga',
@@ -133,10 +135,107 @@ var dental = [
     }
 ];
 
-document.write(`Número de consultas de la especialidad de Radiología: ${radiologia.length} </br> Número de consultas de la especialidad de Traumatología: ${traumatologia.length} </br> Número de consultas de la especialidad de Dental: ${dental.length} </br>`);
+document.write("<h3>Número de consultas</h3>")
+document.write(`<p>Número de consultas de la especialidad de Radiología: ${radiologia.length}</p>`);
+document.write(`<p>Número de consultas de la especialidad de Traumatología: ${traumatologia.length}</p>`);
+document.write(`<p>Número de consultas de la especialidad de Dental: ${dental.length}</p>`);
 
-document.write(`</br> Primera atención de la especialidad de Radiología: ${radiologia[0].Paciente} - ${radiologia[0].Prevision} | Última atención: ${radiologia[radiologia.length - 1].Paciente} - ${radiologia[radiologia.length - 1].Prevision}</br>`); 
 
-document.write(`</br> Primera atención de la especialidad de Traumatología: ${traumatologia[0].Paciente} - ${traumatologia[0].Prevision} | Última atención: ${traumatologia[traumatologia.length - 1].Paciente} - ${traumatologia[traumatologia.length - 1].Prevision} </br>`); 
+document.write("<h3>Primeras y últimas atenciones</h3>")
+document.write(`<p>Primera atención de la especialidad de Radiología: ${radiologia[0].Paciente} - ${radiologia[0].Prevision} | Última atención: ${radiologia[radiologia.length - 1].Paciente} - ${radiologia[radiologia.length - 1].Prevision}</p>`); 
 
-document.write(`</br> Primera atención de la especialidad de Dental: ${dental[0].Paciente} - ${dental[0].Prevision} | Última atención: ${dental[dental.length - 1].Paciente} - ${dental[dental.length - 1].Prevision}</br>`); 
+document.write(`<p>Primera atención de la especialidad de Traumatología: ${traumatologia[0].Paciente} - ${traumatologia[0].Prevision} | Última atención: ${traumatologia[traumatologia.length - 1].Paciente} - ${traumatologia[traumatologia.length - 1].Prevision}</p>`); 
+
+document.write(`<p>Primera atención de la especialidad de Dental: ${dental[0].Paciente} - ${dental[0].Prevision} | Última atención: ${dental[dental.length - 1].Paciente} - ${dental[dental.length - 1].Prevision}</p>`); 
+
+/* Termina Desafío 1 */
+
+/* Empieza Desafío 2 */
+
+// 1. Agregar las siguientes horas al arreglo de Traumatología:
+
+let newTrauma = [
+    {
+        Hora: '9:00',
+        Especialista: 'RENÉ POBLETE',       
+        Paciente: 'Ana Gellona',
+        RUT: '13123329-7', 
+        Prevision: 'ISAPRE'
+    },
+    {
+        Hora: '9:30',
+        Especialista: 'MARIA SOLAR',   
+        Paciente: 'Ramiro Andrade',    
+        RUT: '12221451-K',  
+        Prevision: 'FONASA'
+    },
+    {
+        Hora: '10:00',
+        Especialista: 'RAUL LOYOLA ',    
+        Paciente: 'Carmen Isla',     
+        RUT: '10112348-3',  
+        Prevision: 'ISAPRE'
+    },
+    {
+        Hora: '10:30',
+        Especialista: 'ANTONIO LARENAS',
+        Paciente: 'Pablo Loaiza',
+        RUT: '13453234-1', 
+        Prevision: 'ISAPRE'
+    },
+    {
+        Hora: '12:00',
+        Especialista: 'MATIAS ARAVENA',     
+        Paciente: 'Susana Poblete ',   
+        RUT: '14345656-6', 
+        Prevision: 'FONASA'
+    }
+];
+
+let allTrauma = newTrauma.forEach(function(consulta){
+    traumatologia.push(consulta);
+});
+
+// 2. Eliminar el primer y último elemento del arreglo de Radiología.
+
+radiologia.pop();
+radiologia.shift();
+
+// 3. Lista de consultas médicas de Dental
+
+document.write("<h3>Consultas Médicas Dentales</h3>")
+dental.map(function(infoDental){
+    document.write(`<p>${infoDental.Hora} - ${infoDental.Especialista} - ${infoDental.Paciente} - ${infoDental.RUT} - ${infoDental.Prevision}</p>`)
+});
+
+/*
+4. Imprimir un listado total de todos los pacientes que se atendieron en el centro médico. Para ésto,
+deberá unir todos los nombres de pacientes e imprimir uno por cada párrafo.
+*/
+
+let allPacientes = radiologia.concat(traumatologia, dental);
+document.write("<h3>Pacientes atendidos</h3>")
+allPacientes.forEach(function(pacientesTotal) {
+document.write(`<p>${pacientesTotal.Paciente}</p>`)
+});
+
+/*
+5. Modificar mediante funciones las previsiones de Dental: aquellas que indican ser FONASA
+cambiarlas por ISAPRE y viceversa. Luego, imprimir este resultado junto con el rut asociado a
+dicha consulta, separados por punto y coma.
+*/
+
+let changePrevision = dental.map(function(change){
+    if (change.Prevision === 'Fonasa') {
+        change.Prevision = 'Isapre';
+    }
+    else if (change.Prevision === 'Isapre') {
+        change.Prevision = 'Fonasa'
+    }
+    return change;
+})
+
+document.write("<h3>Previsiones de la especialidad Dental</h3> ")
+dental.forEach(function(el){
+document.write(`<p>Nombre: ${el.Paciente} ; RUT: ${el.RUT} ; Previsión: ${el.Prevision}</p>`)    
+})
